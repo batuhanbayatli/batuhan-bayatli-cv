@@ -1,474 +1,551 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batuhan Bayatlı | Hizmetler</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-gradient: linear-gradient(-45deg, #c471ed, #12c2e9, #f64f59, #12c2e9);
-            --glass-bg: rgba(255, 255, 255, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --text-main: #1D1D1F;
-            --text-sec: #515154;
-            --accent: #0071E3;
-            --radius: 32px;
-            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batuhan Bayatlı — Curriculum Vitae</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600;700&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #f0f0f0;
+      --muted: #4a4a4f;
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-hover: rgba(255, 255, 255, 0.28);
+      --glass-base: rgba(10, 10, 12, 0.45);
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-        body {
-            background: var(--bg-gradient);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-        }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      user-select: none;
+    }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    /* SİNEMATİK GRAIN (KUMLANMA DOKUSU) */
+    .noise-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 5;
+    }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(3, minmax(240px, auto));
-            gap: 24px;
-            max-width: 1200px;
-            width: 100%;
-        }
+    /* MATEMATİKSEL SIVI VE IŞIK ARKA PLANI */
+    #waterCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.65;
+    }
 
-        .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius);
-            padding: 35px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+    /* EDİTORYAL SAHNE DÜZENİ */
+    .stage {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 50px 70px;
+    }
 
-        .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            background: rgba(255, 255, 255, 0.85);
-            z-index: 10;
-        }
+    /* ÜST STATÜ BANDI */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 22px;
+    }
 
-        h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; color: #000; }
-        h2 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 5px; }
-        h3 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 5px; }
-        p { font-size: 0.95rem; color: var(--text-sec); font-weight: 500; line-height: 1.5; margin-top: 5px; }
-        .sub { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-sec); font-weight: 700; opacity: 0.7; margin-bottom: 15px; display: block; }
+    .status-pulse {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .profile-img-container {
-            width: 90px;
-            height: 90px;
-            margin-bottom: 20px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .profile-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .card-profile:hover .profile-img { transform: scale(1.1); }
+    .pulse-dot {
+      width: 5px;
+      height: 5px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #ffffff;
+      animation: blink 2.5s infinite ease-in-out;
+    }
 
-        .card-profile { grid-column: span 2; grid-row: span 2; }
+    @keyframes blink {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
 
-        .card-cv {
-            grid-column: span 1;
-            background: #0f0f11; 
-            color: #fff;
-        }
-        .card-cv p, .card-cv .sub { color: #86868b; }
-        .card-cv:hover { border-color: #333; }
-        .icon-circle { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: auto; font-size: 1.2rem; }
+    /* MERKEZ HERO */
+    .center-monument {
+      margin: auto 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        .card-web { grid-column: span 1; }
+    .monument-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      position: relative;
+    }
 
-        .card-agency {
-            grid-column: span 1;
-            background: linear-gradient(135deg, #0071E3, #4facfe); 
-            color: white;
-            border: none;
-        }
-        .card-agency p, .card-agency .sub { color: rgba(255,255,255,0.8); }
-        .agency-icon { font-size: 2rem; margin-bottom: 10px; }
+    .monument-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.8rem, 6.5vw, 6rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      line-height: 1;
+      text-transform: uppercase;
+      text-shadow: 0 20px 60px rgba(255, 255, 255, 0.12);
+    }
 
-        .card-corporate {
-            grid-column: span 1;
-            background: linear-gradient(135deg, #434343, #000000); 
-            color: white;
-            border: none;
-        }
-        .card-corporate p, .card-corporate .sub { color: rgba(255,255,255,0.7); }
-        .corp-icon { font-size: 2rem; margin-bottom: 10px; }
+    .monument-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #787882;
+      margin-top: 18px;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
 
-        .card-strategy { grid-column: span 1; }
-        .card-mentor { grid-column: span 1; }
+    /* MONOLİTİK DİL PANELİ (4 DİL MİMARİSİ) */
+    .monolith-grid {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
 
-        .card-contact {
-            grid-column: span 2;
-            background: linear-gradient(135deg, #2c3e50, #000000);
-            color: white;
-        }
-        .card-contact p, .card-contact .sub { color: rgba(255,255,255,0.7); }
-        .arrow-icon { font-size: 2.5rem; transition: transform 0.3s; }
-        .card-contact:hover .arrow-icon { transform: translate(5px, -5px); }
+    .monolith-item {
+      background: var(--glass-base);
+      backdrop-filter: blur(40px) saturate(180%);
+      -webkit-backdrop-filter: blur(40px) saturate(180%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 175px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-        .btn-connect {
-            background-color: var(--accent);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 99px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(0,113,227,0.3);
-            transition: 0.3s;
-        }
-        .btn-connect:hover { background-color: #005bb5; transform: scale(1.05); }
+    /* Sıvı Işık Yansıması (Specular Sheen) */
+    .monolith-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(255, 255, 255, 0.09) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
 
-        /* MODAL VE GÖRÜNTÜLEYİCİ STİLLERİ */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
+    .monolith-item:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      background: rgba(18, 18, 22, 0.65);
+      box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 255, 255, 0.03);
+    }
 
-        .modal-box {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 28px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            overflow: hidden;
-            position: relative;
-            animation: modalPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+    .monolith-item:hover::before {
+      opacity: 1;
+    }
 
-        @keyframes modalPop {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+    .item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
 
-        /* Dil Seçim Penceresi */
-        .lang-modal-box {
-            width: 90%;
-            max-width: 440px;
-            padding: 35px 30px;
-            text-align: center;
-        }
-        .lang-modal-box h3 {
-            font-size: 1.5rem;
-            color: #111;
-            margin-bottom: 8px;
-        }
-        .lang-modal-box p {
-            font-size: 0.95rem;
-            color: #666;
-            margin-bottom: 25px;
-        }
-        .lang-options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-        .lang-btn {
-            background: #f5f5f7;
-            border: 1px solid #e1e1e6;
-            border-radius: 18px;
-            padding: 16px 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1d1d1f;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-        .lang-btn span {
-            font-size: 1.4rem;
-        }
-        .lang-btn:hover {
-            background: #0071E3;
-            color: #fff;
-            border-color: #0071E3;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 113, 227, 0.25);
-        }
+    .item-index {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      color: var(--muted);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
 
-        /* PDF Viewer Penceresi */
-        .pdf-modal-box {
-            width: 92%;
-            max-width: 1050px;
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            padding: 0;
-            background: #1e1e24;
-        }
-        .pdf-viewer-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 22px;
-            background: #111114;
-            color: #fff;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .pdf-viewer-header span {
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-        .viewer-actions {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-        .btn-change-lang {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 99px;
-            cursor: pointer;
-            font-size: 0.82rem;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-        .btn-change-lang:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-        .btn-close-modal {
-            background: transparent;
-            border: none;
-            color: #aaa;
-            font-size: 1.5rem;
-            cursor: pointer;
-            line-height: 1;
-            padding: 4px;
-            border-radius: 50%;
-            transition: color 0.2s;
-        }
-        .btn-close-modal:hover {
-            color: #fff;
-        }
-        .pdf-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: #2b2b2b;
-        }
+    .item-glyph {
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: transform 0.4s ease, color 0.4s ease;
+    }
 
-        @media (max-width: 900px) {
-            .grid-container { grid-template-columns: 1fr; grid-template-rows: auto; }
-            .card-profile, .card-cv, .card-web, .card-agency, .card-corporate, .card-strategy, .card-mentor, .card-contact {
-                grid-column: span 1;
-                grid-row: auto;
-                min-height: 240px;
-            }
-            .profile-img-container { width: 80px; height: 80px; }
-            h1 { font-size: 2.2rem; }
-            .pdf-modal-box { width: 96%; height: 85vh; }
-        }
-    </style>
+    .monolith-item:hover .item-glyph {
+      color: #ffffff;
+      transform: translate(3px, -3px);
+    }
+
+    .monolith-item:hover .item-index {
+      color: #a0a0a8;
+    }
+
+    .item-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .item-primary {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+      font-weight: 400;
+    }
+
+    .item-sub {
+      font-size: 0.64rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+
+    .monolith-item:hover .item-sub {
+      color: #8a8a92;
+    }
+
+    /* ALT BİLGİ */
+    .bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 22px;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* LÜKS MİMARİ PDF GÖRÜNTÜLEYİCİ */
+    .curator-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(45px);
+      -webkit-backdrop-filter: blur(45px);
+      z-index: 100;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .curator-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .curator-vault {
+      width: 92vw;
+      max-width: 1200px;
+      height: 90vh;
+      background: #08080a;
+      border: 1px solid var(--border-hover);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.95);
+      transform: scale(0.97);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .curator-modal.active .curator-vault {
+      transform: scale(1);
+    }
+
+    .vault-bar {
+      height: 58px;
+      padding: 0 28px;
+      background: #040405;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .vault-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #e5e5ea;
+    }
+
+    .vault-close {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--muted);
+      padding: 6px 18px;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .vault-close:hover {
+      border-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .vault-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #111113;
+    }
+
+    @media (max-width: 860px) {
+      .stage { padding: 30px 24px; }
+      .monolith-grid { grid-template-columns: repeat(2, 1fr); }
+      .monument-name { font-size: 2.8rem; }
+      .bottom-bar { flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="grid-container">
+  <div class="noise-overlay"></div>
+  <canvas id="waterCanvas"></canvas>
 
-        <div class="card card-profile">
-            <div>
-                <div class="profile-img-container">
-                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQEzvXjrWaVQLA/profile-displayphoto-scale_400_400/B4DZsEf5rKJoAg-/0/1765307030818?e=1770854400&v=beta&t=xCEHSe08445IFLTQTYFKElZfayeR-uCacBuRF8wdPTI" alt="Batuhan Bayatlı" class="profile-img" id="myPhoto">
-                </div>
+  <div class="stage">
+    <!-- Üst Statü -->
+    <header class="top-bar">
+      <span>Archival Portfolio &bull; 2026</span>
+      <div class="status-pulse">
+        <div class="pulse-dot"></div>
+        <span>Available for Strategic Roles</span>
+      </div>
+    </header>
 
-                <h1>Batuhan Bayatlı.</h1>
-                <p style="font-size: 1.1rem; color: #444; font-weight: 600;">Financial Analyst & InsurTech Developer | Bridging Finance with Data Strategy | Python, SQL & Web | 🇯🇵 🇹🇷</p>
-                <p style="margin-top: 15px; max-width: 420px;">
-                    Bankacılık uzmanlığı ve kodlama yeteneğiyle hibrit çözümler. 
-                    Sıradan bir yazılımcı değil, iş süreçlerini optimize eden stratejik bir ortak.
-                </p>
-            </div>
-            <div>
-                <a href="https://www.linkedin.com/in/batuhanbayatlı/" target="_blank" class="btn-connect">LinkedIn'de Bağlanın ›</a>
-            </div>
+    <!-- Merkez -->
+    <main class="center-monument">
+      <span class="monument-eyebrow">Curriculum Vitae</span>
+      <h1 class="monument-name">Batuhan Bayatlı</h1>
+      <p class="monument-quote">InsurTech &bull; Quantitative Risk Theory &bull; Enterprise Strategy</p>
+    </main>
+
+    <!-- Dil Paneli (4 Monolit) -->
+    <nav class="monolith-grid">
+      <div class="monolith-item" onclick="openVault('cv_tr.pdf', 'Batuhan Bayatlı — Türkçe Özgeçmiş')">
+        <div class="item-top">
+          <span class="item-index">01 / TR</span>
+          <span class="item-glyph">↗</span>
         </div>
-
-        <!-- TIKLANDIĞINDA DİL SEÇİM MODALINI AÇAN CV KARTI -->
-        <div class="card card-cv" onclick="openLanguageModal()">
-            <span class="sub">Curriculum Vitae</span>
-            <h3>Özgeçmiş / CV</h3>
-            <div style="margin-top: auto;">
-                <p>4 farklı dilde hazırlanmış, ATS uyumlu profesyonel özgeçmişimi inceleyin.</p>
-                <div class="icon-circle">📄</div>
-            </div>
+        <div class="item-bottom">
+          <div class="item-primary">Türkçe</div>
+          <div class="item-sub">cv_tr.pdf</div>
         </div>
+      </div>
 
-        <div class="card card-web" onclick="window.open('https://www.linkedin.com/in/batuhanbayatlı/','_blank')">
-            <span class="sub">Web Architecture</span>
-            <h3>Premium Web</h3>
-            <div style="margin-top: auto;">
-                <p>Prestij inşa ediyoruz. Apple estetiğinde kişisel ve kurumsal siteler.</p>
-                <div class="icon-circle" style="background: rgba(0,0,0,0.05); color: #333;">🖥️</div>
-            </div>
+      <div class="monolith-item" onclick="openVault('cv_en.pdf', 'Batuhan Bayatlı — English Resume')">
+        <div class="item-top">
+          <span class="item-index">02 / EN</span>
+          <span class="item-glyph">↗</span>
         </div>
-
-        <div class="card card-agency" onclick="window.open('https://www.linkedin.com/in/batuhanbayatlı/','_blank')">
-            <div class="agency-icon">⚡️</div>
-            <span class="sub" style="color: rgba(255,255,255,0.8);">Acente Çözümleri</span>
-            <h3>Dijital Acente 2.0</h3>
-            <p style="margin-top: auto;">
-                Müşteri kazanım otomasyonu ve dijital süreç yönetimi ile klasik acenteliği aşın.
-            </p>
+        <div class="item-bottom">
+          <div class="item-primary">English</div>
+          <div class="item-sub">cv_en.pdf</div>
         </div>
+      </div>
 
-        <div class="card card-corporate" onclick="window.open('https://www.linkedin.com/in/batuhanbayatlı/','_blank')">
-            <div class="corp-icon">🏢</div>
-            <span class="sub" style="color: rgba(255,255,255,0.7);">Kurumsal & InsurTech</span>
-            <h3>API Entegrasyon</h3>
-            <p style="margin-top: auto;">
-                BankSigOS altyapısı ve sigorta şirketleri için özel API çözümleri[cite: 5].
-            </p>
+      <div class="monolith-item" onclick="openVault('cv_de.pdf', 'Batuhan Bayatlı — Deutscher Lebenslauf')">
+        <div class="item-top">
+          <span class="item-index">03 / DE</span>
+          <span class="item-glyph">↗</span>
         </div>
-
-        <div class="card card-strategy" onclick="window.open('https://www.linkedin.com/in/batuhanbayatlı/','_blank')">
-            <span class="sub">Data & Strategy</span>
-            <h3>Veri Analizi</h3>
-            <p>Excel ve Python ile karmaşık verileri "karar aldıran" raporlara çeviriyorum[cite: 6].</p>
+        <div class="item-bottom">
+          <div class="item-primary">Deutsch</div>
+          <div class="item-sub">cv_de.pdf</div>
         </div>
+      </div>
 
-        <div class="card card-mentor" onclick="window.open('https://www.linkedin.com/in/batuhanbayatlı/','_blank')">
-            <span class="sub">Mentorship</span>
-            <h3>Kariyer Yolu</h3>
-            <p>Bankacılık/Sigortacılık öğrencileri için 1:1 sınav ve kariyer taktikleri[cite: 1, 3].</p>
+      <div class="monolith-item" onclick="openVault('cv_jp.pdf', 'Batuhan Bayatlı — 日本語 履歴書')">
+        <div class="item-top">
+          <span class="item-index">04 / JP</span>
+          <span class="item-glyph">↗</span>
         </div>
-
-        <div class="card card-contact" onclick="window.open('https://www.linkedin.com/in/batuhanbayatlı/','_blank')">
-            <div style="display: flex; justify-content: space-between;">
-                <div>
-                    <span class="sub">Project Inquiry</span>
-                    <h2 style="font-size: 2.2rem;">Bir fikriniz mi var?</h2>
-                </div>
-                <span class="arrow-icon">↗</span>
-            </div>
-            <p style="margin-top: auto; max-width: 85%;">
-                FinTech projeleri veya kurumsal dönüşüm için beklemeyin. 
-                <strong style="color: white; border-bottom: 1px solid white;">Hemen mesaj atın.</strong>
-            </p>
+        <div class="item-bottom">
+          <div class="item-primary">日本語</div>
+          <div class="item-sub">cv_jp.pdf</div>
         </div>
+      </div>
+    </nav>
 
+    <!-- Alt Statü -->
+    <footer class="bottom-bar">
+      <span>Certified by SEGEM &bull; JLPT N3[cite: 1, 6]</span>
+      <span>Monochrome Fluid Framework</span>
+    </footer>
+  </div>
+
+  <!-- PDF Görüntüleyici -->
+  <div id="curatorModal" class="curator-modal" onclick="closeVault(event)">
+    <div class="curator-vault" onclick="event.stopPropagation()">
+      <div class="vault-bar">
+        <div class="vault-title" id="vaultTitle">Dossier</div>
+        <button class="vault-close" onclick="closeVaultDirect()">Close ✕</button>
+      </div>
+      <iframe id="vaultFrame" class="vault-frame" src="" title="Curriculum Vitae Viewer"></iframe>
     </div>
+  </div>
 
-    <!-- 1. ADIM: DİL SEÇİM MODALI -->
-    <div id="languageModal" class="modal-overlay" onclick="closeAllModals(event)">
-        <div class="modal-box lang-modal-box" onclick="event.stopPropagation()">
-            <h3>📄 Özgeçmiş Dili Seçin</h3>
-            <p>Görüntülemek istediğiniz CV dilini belirleyin:</p>
-            
-            <div class="lang-options-grid">
-                <button class="lang-btn" onclick="openPdfViewer('cv_tr.pdf', 'Türkçe Özgeçmiş')">
-                    <span>🇹🇷</span> Türkçe
-                </button>
-                <button class="lang-btn" onclick="openPdfViewer('cv_en.pdf', 'English Resume')">
-                    <span>🇬🇧</span> English
-                </button>
-                <button class="lang-btn" onclick="openPdfViewer('cv_de.pdf', 'Deutscher Lebenslauf')">
-                    <span>🇩🇪</span> Deutsch
-                </button>
-                <button class="lang-btn" onclick="openPdfViewer('cv_jp.pdf', '日本語 履歴書')">
-                    <span>🇯🇵</span> 日本語
-                </button>
-            </div>
-        </div>
-    </div>
+  <script>
+    /* ETKİLEŞİMLİ FİZİKSEL SIVI YÜZEYİ & MONOKROM SİMÜLASYON */
+    const canvas = document.getElementById('waterCanvas');
+    const ctx = canvas.getContext('2d');
 
-    <!-- 2. ADIM: İÇ PDF GÖRÜNTÜLEYİCİ MODAL -->
-    <div id="pdfViewerModal" class="modal-overlay" onclick="closeAllModals(event)">
-        <div class="modal-box pdf-modal-box" onclick="event.stopPropagation()">
-            <div class="pdf-viewer-header">
-                <span id="pdfViewerTitle">📄 Özgeçmiş</span>
-                <div class="viewer-actions">
-                    <button class="btn-change-lang" onclick="switchBackToLanguageModal()">🌐 Dil Değiştir</button>
-                    <button class="btn-close-modal" onclick="closePdfModal()">✕</button>
-                </div>
-            </div>
-            <iframe id="pdfFrame" class="pdf-iframe" src="" title="CV Viewer"></iframe>
-        </div>
-    </div>
+    let width, height;
+    let ripples = [];
 
-    <script>
-        const seninFotografLinkin = 'https://media.licdn.com/dms/image/v2/D4D03AQEzvXjrWaVQLA/profile-displayphoto-scale_400_400/B4DZsEf5rKJoAg-/0/1765307030818?e=1770854400&v=beta&t=xCEHSe08445IFLTQTYFKElZfayeR-uCacBuRF8wdPTI'; 
-        document.getElementById('myPhoto').src = seninFotografLinkin;
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
 
-        const langModal = document.getElementById('languageModal');
-        const pdfModal = document.getElementById('pdfViewerModal');
-        const pdfFrame = document.getElementById('pdfFrame');
-        const pdfTitle = document.getElementById('pdfViewerTitle');
+    // Kartlar üzerinde fare ışık takibi
+    document.querySelectorAll('.monolith-item').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
 
-        function openLanguageModal() {
-            langModal.classList.add('active');
-        }
+    // Farenin arkasında bıraktığı ipeksi sıvı süzülüşü
+    window.addEventListener('mousemove', (e) => {
+      if (Math.random() > 0.65) {
+        ripples.push({
+          x: e.clientX,
+          y: e.clientY,
+          radius: 1,
+          alpha: 0.35,
+          speed: 1.2 + Math.random() * 1.2
+        });
+      }
+    });
 
-        function openPdfViewer(pdfUrl, titleText) {
-            langModal.classList.remove('active');
-            pdfTitle.innerText = titleText;
-            pdfFrame.src = pdfUrl;
-            pdfModal.classList.add('active');
-        }
+    function renderWater() {
+      ctx.clearRect(0, 0, width, height);
 
-        function switchBackToLanguageModal() {
-            pdfModal.classList.remove('active');
-            pdfFrame.src = "";
-            langModal.classList.add('active');
-        }
+      // İpeksi arka plan sıvı gradyanları
+      const time = Date.now() * 0.0008;
+      for (let i = 0; i < 2; i++) {
+        const x = width * 0.5 + Math.sin(time + i * 2) * (width * 0.2);
+        const y = height * 0.5 + Math.cos(time * 0.8 + i) * (height * 0.2);
+        const grad = ctx.createRadialGradient(x, y, 50, x, y, 380);
+        grad.addColorStop(0, 'rgba(255, 255, 255, 0.025)');
+        grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(x, y, 380, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
-        function closePdfModal() {
-            pdfModal.classList.remove('active');
-            pdfFrame.src = "";
-        }
+      // Yayılımcı monokrom dalgalar
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const r = ripples[i];
+        r.radius += r.speed;
+        r.alpha *= 0.97;
 
-        function closeAllModals(event) {
-            langModal.classList.remove('active');
-            pdfModal.classList.remove('active');
-            pdfFrame.src = "";
-        }
-    </script>
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${r.alpha * 0.2})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        if (r.alpha < 0.005) ripples.splice(i, 1);
+      }
+
+      requestAnimationFrame(renderWater);
+    }
+    renderWater();
+
+    /* MODAL MEKANİZMASI */
+    const modal = document.getElementById('curatorModal');
+    const vaultFrame = document.getElementById('vaultFrame');
+    const vaultTitle = document.getElementById('vaultTitle');
+
+    function openVault(file, title) {
+      // Tıklamada merkezden yayılan derin su dalgası
+      ripples.push({
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+        radius: 10,
+        alpha: 0.7,
+        speed: 5.5
+      });
+
+      vaultTitle.innerText = title;
+      vaultFrame.src = file;
+      modal.classList.add('active');
+    }
+
+    function closeVaultDirect() {
+      modal.classList.remove('active');
+      setTimeout(() => { vaultFrame.src = ""; }, 350);
+    }
+
+    function closeVault(e) {
+      if (e.target === modal) closeVaultDirect();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeVaultDirect();
+    });
+  </script>
 
 </body>
 </html>
